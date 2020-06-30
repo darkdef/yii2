@@ -926,7 +926,7 @@ class Connection extends Component
      * If the column name is already quoted or contains special characters including '(', '[[' and '{{',
      * then this method will do nothing.
      * If the column name is an instance of `ExpressionInterface` it is returned as is.
-     * @param string $name|ExpressionInterface column name
+     * @param $name string|ExpressionInterface column name
      * @return string the properly quoted column name
      */
     public function quoteColumnName($name)
