@@ -57,7 +57,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@develop
         with:
           php-version: ${{ matrix.php }}
           tools: pecl
@@ -94,6 +94,11 @@ jobs:
       - name: PHP Unit tests for PHP 7.1
         run: vendor/bin/phpunit --verbose --coverage-clover=coverage.clover --exclude-group oci,wincache,xcache,zenddata,cubrid
         if: matrix.php == '7.1'
+      - name: PHP Unit tests for PHP 7.2 - 7.4
+        run: vendor/bin/phpunit --verbose --group oci8
+        env:
+            PHPUNIT_EXCLUDE_GROUP: oci,wincache,xcache,zenddata,cubrid
+        if: matrix.php == '7.4' || matrix.php == '7.3' || matrix.php == '7.2'
       - name: PHP Unit tests for PHP 7.2 - 7.4
         run: vendor/bin/phpunit --verbose --exclude-group $PHPUNIT_EXCLUDE_GROUP
         env:
